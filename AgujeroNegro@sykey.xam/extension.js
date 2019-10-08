@@ -13,8 +13,8 @@ const Gio = imports.gi.Gio; //Cambio de fondo de pantalla
 //const glib = imports.gi.GLib; //home del usuario 
 const ExtensionUtils = imports.misc.extensionUtils; //propiedades de la extension
 
-
-let button;
+const TEMinimo      = 30; // Minimo 30 segundo para activarse si es inferior se activa con boton
+const TiempoEspera  = 60; // Tiempo de espera definido
 
 
 function doSetBackground(uri, schema) {
@@ -101,7 +101,7 @@ function IniciarTragarObj(){
   
 }
 
-function _IniciarAgujeroNegro() {
+function IniciarAgujeroNegro() {
 
 //////////////////// ESTABLECER FONDO DE PANTALLA ////////////////////////////
   doSetBackground(ExtensionUtils.getCurrentExtension().path+"/agujero-negro-en-el-espacio.jpg", 'org.gnome.desktop.background');
@@ -114,7 +114,6 @@ function _IniciarAgujeroNegro() {
 		       onComplete: IniciarTragarObj 
                      }
 		);
-
 ///////////////////////////////////////////////////////////////////////
 
 
@@ -131,13 +130,24 @@ function init() {
                              style_class: 'system-status-icon' });
 
     button.set_child(icon);
-    button.connect('button-press-event', _IniciarAgujeroNegro);
+    button.connect('button-press-event', IniciarAgujeroNegro);
 }
 
 function enable() {
-    Main.panel._rightBox.insert_child_at_index(button, 0);
+   if (TiempoEspera < TEMinimo){
+     Main.panel._rightBox.insert_child_at_index(button, 0);
+   }else{
+     Tweener.addTween({},{ 
+	               	   delay: TiempoEspera,                       
+		           onComplete: IniciarAgujeroNegro 
+	                 }
+		     );
+     
+   }
 }
 
 function disable() {
-    Main.panel._rightBox.remove_child(button);
+   if (TiempoEspera < TEMinimo){               
+     Main.panel._rightBox.remove_child(button);
+   }
 }
