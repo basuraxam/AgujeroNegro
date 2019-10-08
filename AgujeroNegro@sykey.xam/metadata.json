@@ -1,1 +1,7 @@
-{"name": "AgujeroNegro", "description": "Muestra imagen de una agujero negro y se traga todos los objetos que hay en pantalla, windows, dock, panel, iconos", "uuid": "AgujeroNegro@sykey.xam", "shell-version": ["3.32.1"]}
+{
+"name": "Agujero Negro", 
+"description": "Muestra la imagen de un agujero negro como fondo de pantalla y se traga todos los objetos que hay en la pantalla: windows, dock, panel, iconos",
+"url": "https://www.youtube.com/sykeyxam",
+"uuid": "AgujeroNegro@sykey.xam",
+"shell-version": ["3.32.1"]
+}

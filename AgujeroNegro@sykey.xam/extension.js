@@ -1,20 +1,39 @@
+/////////////////////////////////////////////////////////////////////////
+// Agujero Negro para GNOME 3 - Versión Alpha 1.0 - <<SyKeY-XAM>> 
+// Canal Youtube: https://www.youtube.com/sykeyxam
+/////////////////////////////////////////////////////////////////////////
+// NOTAS:
+// Destino   : /home/usuario/.local/share/gnome-shell/extensions/AgujeroNegro@sykey.xam
+// Extension : gnome-shell-extension-prefs
+// Reiniciar : ALT + F2 luego escribir "r"
+// Configurar:  
+//		1. Descargar de GitHub con la opción CLONAR
+//		2. Copiar carpeta AgujeroNegro@sykey.xam (no es un correo) a la carpeta Destino (indicado arriba)
+//		3. Modificar parametro "TiempoEspera" (es una constante de este fichero) segun interese.
+//		4. Activar extensión. 
+//		5. En mi canal hay un vídeo visual de como configurarlo.
 
-// NOTA: 
-// OK - Dock, 		falta ajustar el tragador segun la posicion del dock
-// NO - standar, 	probar en gnome standar
-// NO - iconos, 	eliminio iconos al no poder moverlos correctamente.
-// NO - dock bloq,	si el dock esta bloqueado no funciona por lo tanto lo elimino.
-// OK - ventanas,    	tratar con mas de una ventana abierta
+// MEJORAS:
+// OK - Dock, 		Falta ajustar el tragador según la posición del dock
+// OK - Ventanas,    	Tratar con + de una ventana abierta
+// NO - Configurar,     Crear opción para configurar
+// NO - Estándar, 	Probar en gnome estándar
+// NO - Iconos, 	Oculto los iconos al no poder moverlos correctamente.
+// NO - dock bloq,	Si el dock esta bloqueado no funciona por lo tanto lo oculto.
+// gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false
+
+
+const TiempoEspera  = 20; // Tiempo de espera definido
+const TEMinimo      = 30; // Mínimo 30 segundo para activarse si es inferior se activa con botón, si es superior por tiempo
+
 
 const St = imports.gi.St;
 const Main = imports.ui.main;
 const Tweener = imports.ui.tweener;
 const Gio = imports.gi.Gio; //Cambio de fondo de pantalla
 //const glib = imports.gi.GLib; //home del usuario 
-const ExtensionUtils = imports.misc.extensionUtils; //propiedades de la extension
+const ExtensionUtils = imports.misc.extensionUtils; //propiedades de la extensión
 
-const TEMinimo      = 30; // Minimo 30 segundo para activarse si es inferior se activa con boton
-const TiempoEspera  = 60; // Tiempo de espera definido
 
 
 function doSetBackground(uri, schema) {
